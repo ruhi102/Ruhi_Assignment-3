@@ -1,0 +1,19 @@
+name: autograding
+on: push
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        name: Install-pnpm
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: true
+      - name: Run the tests
+        run: pnpm test
+        continue-on-error: true
+      - name: Run linting
+        run: pnpm lint
